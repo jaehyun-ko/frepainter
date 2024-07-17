@@ -105,6 +105,7 @@ def make_filelist_libritts(args):
         rets = list(filter(None, rets))
         rets.sort()
         random.seed(1234)
+        print(len(rets))
         rets = random.sample(rets, 500)
     with open('./filelists/filelist_libritts_test.txt', 'w') as f:
         for ret in rets:
@@ -116,7 +117,7 @@ class DLoader():
         if args.save_audio:
             self.wavs = glob.glob(os.path.join(args.input_dir, 'wav48_silence_trimmed/**/*_mic1.flac'), recursive=True)
         else:
-            self.wavs = glob.glob(os.path.join(args.input_dir, '**/*.wav'), recursive=True)
+            self.wavs = glob.glob(os.path.join(args.input_dir, '**/*.flac'), recursive=True)
         self.args = args
         print('wav num: ', len(self.wavs))
 
@@ -126,7 +127,7 @@ class DLoader():
                                         top_db=20,
                                         frame_length=2048,
                                         hop_length=300)
-        audio = librosa.resample(audio, sr, self.args.samplerate)
+        audio = librosa.resample(audio, orig_sr=sr, target_sr=self.args.samplerate)
         audio = audio / np.max(np.abs(audio)) * 0.95
         basename = os.path.splitext(os.path.basename(self.wavs[index]))[0].replace('_mic1','')
         spk_name = basename.split('_')[0]
