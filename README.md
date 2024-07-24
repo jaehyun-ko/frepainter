@@ -15,15 +15,15 @@ pip install -r requirements.txt
 - [LibriTTS](https://www.openslr.org/60/)
 ### 2. Preprocessing for pre-training
 ```
-INPUT_DIR=[Directory of LibriTTS]
-OUTPUT_DIR=./dataset/LibriTTS
+INPUT_DIR=/data1/DB/LibriTTS/LibriTTS
+OUTPUT_DIR=/data1/projects/frepainter/preprocessed_data/LibriTTS
 CUDA_VISIBLE_DEVICES=0,1 python preprocess.py -i $INPUT_DIR -o $OUTPUT_DIR
 ```
 ### 3. Preprocessing for fine-tuning
 ```
-INPUT_DIR=[Directory of VCTK]
-OUTPUT_DIR=./dataset/VCTK
-CUDA_VISIBLE_DEVICES=0,1 python preprocess.py -i $INPUT_DIR -o $OUTPUT_DIR --save_audio
+INPUT_DIR=/data1/DB/VCTK/VCTK/data/VCTK-Corpus
+OUTPUT_DIR=/data1/projects/frepainter/preprocessed_data/VCTK
+CUDA_VISIBLE_DEVICES=0,1,2,3,4 python preprocess.py -i $INPUT_DIR -o $OUTPUT_DIR --save_audio
 ```
 ## Pre-training
 ```
