@@ -212,7 +212,7 @@ def prepare_data(rank: int, data_loader: DataLoader, args: argparse.Namespace) -
     with torch.no_grad():
         for batch_idx, batch in enumerate(tqdm(data_loader)):
             audio, name = batch
-            mel = mel_spectrogram_ttorch(audio.cuda(rank, non_blocking=True).unsqueeze(0),
+            mel = mel_spectrogram_torch(audio.cuda(rank, non_blocking=True).unsqueeze(0),
                                         n_fft=2048,
                                         num_mels=128,
                                         sampling_rate=24000,
